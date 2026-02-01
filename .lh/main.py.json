@@ -1,0 +1,22 @@
+{
+    "sourceFile": "main.py",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1769946534501,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1769946642469,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,6 +37,11 @@\n # Predict\r\n predictions = model.predict(X_test)\r\n \r\n # Evaluate\r\n-rmse = mean_squared_error(y_test, predictions, squared=False)\r\n+mse = mean_squared_error(y_test, predictions)\r\n+rmse = mse ** 0.5\r\n+\r\n print(\"RMSE:\", rmse)\r\n+\r\n+\r\n+\r\n"
+                }
+            ],
+            "date": 1769946534501,
+            "name": "Commit-0",
+            "content": "import pandas as pd\r\nfrom sklearn.model_selection import train_test_split\r\nfrom sklearn.metrics import mean_squared_error\r\nfrom xgboost import XGBRegressor\r\n\r\n# Load dataset\r\ndata = pd.read_csv(\"kc_house_data.csv\")\r\n\r\n# Select useful numeric features\r\nfeatures = [\r\n    \"bedrooms\",\r\n    \"bathrooms\",\r\n    \"sqft_living\",\r\n    \"floors\",\r\n    \"grade\"\r\n]\r\n\r\nX = data[features]\r\ny = data[\"price\"]\r\n\r\n# Split data\r\nX_train, X_test, y_train, y_test = train_test_split(\r\n    X, y, test_size=0.2, random_state=42\r\n)\r\n\r\n# XGBoost model\r\nmodel = XGBRegressor(\r\n    n_estimators=100,\r\n    learning_rate=0.1,\r\n    max_depth=5,\r\n    random_state=42\r\n)\r\n\r\n# Train model\r\nmodel.fit(X_train, y_train)\r\n\r\n# Predict\r\npredictions = model.predict(X_test)\r\n\r\n# Evaluate\r\nrmse = mean_squared_error(y_test, predictions, squared=False)\r\nprint(\"RMSE:\", rmse)\r\n"
+        }
+    ]
+}
